@@ -1,14 +1,14 @@
 const response = (_, res, next) => {
   res.success = (data, status = 200) => {
     res.status(status).json({
-      status: "success",
+      message: "Success",
       data,
     });
   };
 
   res.error = (error, status = 500) => {
     res.status(status).json({
-      status: "error",
+      message: "Error",
       error,
     });
   };
