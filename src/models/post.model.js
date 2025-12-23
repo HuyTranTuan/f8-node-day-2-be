@@ -1,4 +1,4 @@
-const { loadDB, saveDB } = require("../utils/jsonDB");
+const { loadDB, saveDB } = require("../../utils/jsonDB");
 const { v4: uuidv4 } = require("uuid");
 
 let db = [];

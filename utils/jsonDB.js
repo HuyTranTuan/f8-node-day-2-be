@@ -1,7 +1,7 @@
 const { readFile, writeFile } = require("node:fs/promises");
 const path = require("node:path");
 
-const DB_file = path.join(__dirname, "db.json");
+const DB_file = path.join(__dirname, "..", "db.json");
 
 const loadDB = async () => {
   try {
