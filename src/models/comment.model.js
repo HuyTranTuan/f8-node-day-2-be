@@ -21,17 +21,27 @@ const commentModel = {
     return db.comments.find((_comment) => _comment.id === id);
   },
   create(comment) {
-    const findPost = db.posts.find((_post) => _post.id === comment.postId);
-    if (!findPost) return { status: 409, data: "Post does not exists!" };
-    const uniqueId = uuidv4();
-    const newcomment = {
-      id: uniqueId,
-      postId: comment.postId,
+    const targetId = String(comment.postId || "")
+      .trim()
+      .toLowerCase();
+
+    const findPost = db.posts.find(
+      (_post) => String(_post.id).toLowerCase() === targetId
+    );
+
+    if (!findPost) {
+      return { status: 404, data: "Post does not exist!" };
+    }
+
+    const newComment = {
+      id: uuidv4(),
+      postId: comment.postId.trim(),
       content: comment.content,
+      createdAt: new Date(Date.now()),
     };
-    db.comments.push(newcomment);
+    db.comments.push(newComment);
     saveDB(db);
-    return { status: 201, data: newcomment };
+    return { status: 201, data: newComment };
   },
   update(id, comment) {
     const updatecomment = db.comments.find((_comment) => {
@@ -49,7 +59,9 @@ const commentModel = {
   del(id) {
     const comment = db.comments.find((_comment) => _comment.id === id);
     if (!comment) return { status: 404, data: null };
-    db.comments = db.comments.filter((_comment) => _comment.id !== comment.id);
+    db.comments = db.comments.filter(
+      (_comment) => _comment.id.trim() !== comment.id.trim()
+    );
     saveDB(db);
     return { status: 204, data: null };
   },

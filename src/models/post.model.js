@@ -22,15 +22,16 @@ const postModel = {
   },
   create(post) {
     if (!post.title) return { status: 400, data: post };
-    const checkTitle = db.posts.find((_post) => _post.title === post.title);
+    const checkTitle = db.posts.find(
+      (_post) => _post.title === post.title.trim()
+    );
     if (checkTitle) return { status: 409, data: checkTitle };
-    const uniqueId = uuidv4();
-    const ms = new Date(Date.now());
+
     const newPost = {
-      id: uniqueId,
-      title: post.title,
+      id: uuidv4(),
+      title: post.title.trim(),
       content: post.content,
-      createdAt: ms,
+      createdAt: new Date(Date.now()),
     };
     db.posts.push(newPost);
     saveDB(db);
@@ -38,7 +39,7 @@ const postModel = {
   },
   update(id, post) {
     const updatePost = db.posts.find((_post) => {
-      if (_post.id === id) {
+      if (_post.id === id.trim()) {
         _post.title = post.title;
         _post.content = post.content;
         return _post;
@@ -51,10 +52,10 @@ const postModel = {
       : { status: 404, data: null };
   },
   del(id) {
-    const post = db.posts.find((_post) => _post.id === id);
+    const post = this.findOne(id);
     if (!post) return { status: 404, data: null };
-    db.comments = db.comments.filter((_comment) => _comment.postId !== post.id);
     db.posts = db.posts.filter((_post) => _post.id !== post.id);
+    db.comments = db.comments.filter((_comment) => _comment.postId !== post.id);
     saveDB(db);
     return { status: 200, data: db };
   },
