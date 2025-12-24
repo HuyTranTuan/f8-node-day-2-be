@@ -5,25 +5,9 @@
       "title": "huy dep trai",
       "content": "asdasdas",
       "createdAt": "2025-12-24T09:03:37.972Z"
-    },
-    {
-      "id": "e06a91a5-a5cc-4a5c-8be1-a23338d3ca31",
-      "title": "huy do con",
-      "content": "as tap gym",
-      "createdAt": "2025-12-24T09:36:32.021Z"
     }
   ],
   "comments": [
-    {
-      "id": "92f49dc3-8cd9-4d61-b977-427e96c2a7b3",
-      "postId": "e06a91a5-a5cc-4a5c-8be1-a23338d3ca31",
-      "content": "Do con qua  asdas"
-    },
-    {
-      "id": "0b73aefd-c97c-47dd-94b2-ed2b404da588",
-      "postId": "e06a91a5-a5cc-4a5c-8be1-a23338d3ca31",
-      "content": "Anh tap sao vay ?"
-    },
     {
       "id": "b23d0c89-9858-4790-8bc1-12e49509aae4",
       "postId": "42369e32-e580-47fd-8ce3-3cfa166edeb6",

@@ -56,7 +56,7 @@ const postModel = {
     db.comments = db.comments.filter((_comment) => _comment.postId !== post.id);
     db.posts = db.posts.filter((_post) => _post.id !== post.id);
     saveDB(db);
-    return { status: 204, data: null };
+    return { status: 200, data: db };
   },
 };
 
