@@ -21,6 +21,7 @@ const postModel = {
     return db.posts.find((_post) => _post.id === id);
   },
   create(post) {
+    if (!post.title) return { status: 400, data: post };
     const checkTitle = db.posts.find((_post) => _post.title === post.title);
     if (checkTitle) return { status: 409, data: checkTitle };
     const uniqueId = uuidv4();
